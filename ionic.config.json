@@ -1,0 +1,7 @@
+{
+  "name": "Ghibli-Taller-1",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
