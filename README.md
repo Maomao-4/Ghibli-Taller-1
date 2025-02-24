@@ -13,6 +13,17 @@ Una web interactiva que muestra información sobre las películas de Studio Ghib
 - ⏳ Duración
 - 📖 Descripción
 
+## 📸 Capturas de Pantalla
+🏠 Pantalla de Inicio
+
+![Intro page Desktop](https://cdn.discordapp.com/attachments/1320079594430402705/1343653953442811945/1.png?ex=67be0ec2&is=67bcbd42&hm=ca6ec0bf1f39a40097c124f4fa649958bf7e164fe7567e0b50693f437fc7c4f3&)
+
+🎬 Lista de Películas
+![Intro page Desktop](https://media.discordapp.net/attachments/1320079594430402705/1343653954029883423/2.png?ex=67be0ec2&is=67bcbd42&hm=419d3a3f451bfa7596c790f10bef5dda432502c98c362941df3bb91d98875ef8&=&format=webp&quality=lossless&width=887&height=459)
+
+🔎 Vista Detallada
+![Intro page Desktop](https://media.discordapp.net/attachments/1320079594430402705/1343653954646708265/3.png?ex=67be0ec2&is=67bcbd42&hm=b04c93a479257e6b86f1b82facb85c4570d0e2645dc59ed64b83e2a20b32c67a&=&format=webp&quality=lossless&width=887&height=459)
+
 ## 🚀 Tecnologías
 Frontend: Ionic Angluar con componentes personalizados
 API: Ghibli API
