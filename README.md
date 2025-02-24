@@ -18,7 +18,7 @@ Frontend: Ionic Angluar con componentes personalizados
 API: Ghibli API
 
 ## 📦 Instalación y Uso
-- git clone https://github.com/tu_usuario/ghibli-web.git
+- git clone [https://github.com/tu_usuario/ghibli-web.git](https://github.com/Maomao-4/Ghibli-Taller-1.git)
 - npm install 
 - npm start
   
