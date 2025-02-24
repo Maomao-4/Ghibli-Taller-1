@@ -25,7 +25,8 @@ Una web interactiva que muestra información sobre las películas de Studio Ghib
 ![Intro page Desktop](https://media.discordapp.net/attachments/1320079594430402705/1343653954646708265/3.png?ex=67be0ec2&is=67bcbd42&hm=b04c93a479257e6b86f1b82facb85c4570d0e2645dc59ed64b83e2a20b32c67a&=&format=webp&quality=lossless&width=887&height=459)
 
 ## 🚀 Tecnologías
-Frontend: Ionic Angluar con componentes personalizados
+Frontend: Ionic Angular + CSS
+Backend: TypeScript
 API: Ghibli API
 
 ## 📦 Instalación y Uso
