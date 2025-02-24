@@ -18,11 +18,13 @@ Frontend: Ionic Angluar con componentes personalizados
 API: Ghibli API
 
 ## 📦 Instalación y Uso
-- git clone [https://github.com/tu_usuario/ghibli-web.git](https://github.com/Maomao-4/Ghibli-Taller-1.git)
-- npm install 
-- npm start
+1. ```git clone https://github.com/Maomao-4/Ghibli-Taller-1.git```
+2. ```npm install ```
+3. ```ionic serve```
   
-##📡 API Utilizada
+## 📡 API Utilizada
 Esta web obtiene los datos de la API pública de Studio Ghibli:
 - 🔗 Ghibli API (https://ghibliapi.vercel.app/)
 
+## 🏆 Créditos
+Proyecto inspirado en las obras de Studio Ghibli. No está afiliado oficialmente al estudio.
