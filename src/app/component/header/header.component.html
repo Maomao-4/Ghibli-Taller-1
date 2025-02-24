@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-toolbar>
+    <app-input text="Studio Ghibli" (action)="intro('intro')" />
+    @if (param === '1') {
+      <app-input text="Home" (action)="intro('home')" />
+    }
+  </ion-toolbar>
+</ion-header>
+

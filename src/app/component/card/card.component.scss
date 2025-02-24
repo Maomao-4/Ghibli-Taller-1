@@ -1,0 +1,115 @@
+.ghibli-container {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    filter: drop-shadow(3px 3px 10px rgba(245, 171, 80, 0.884));
+  }
+}
+
+.ghibli-card {
+  background: #f8e4c3;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  min-height: 500px;
+}
+
+.ghibli-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  --border-radius: 10px;
+}
+
+.ghibli-avatar img {
+  width: 80%;
+  height: 80%;
+  object-fit: fill;
+  border: 2px solid #f5ab50;
+  margin-top: 30px;
+}
+
+.ghibli-info {
+  text-align: center;
+}
+
+.ghibli-title-g {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.ghibli-subtitle-g {
+  font-size: 1.1rem;
+  color: #666;
+  font-family: "Kaushan Script", cursive;
+}
+
+.ghibli-content {
+  padding: 15px;
+}
+
+.ghibli-image {
+  width: 550px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #f5ab50;
+  position: relative;
+  top: 25px;
+}
+
+.ghibli-info {
+  flex: 1;
+}
+
+.ghibli-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  font-family: "Noto Serif JP", serif;
+}
+
+.ghibli-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  font-family: "Kaushan Script", cursive;
+}
+
+.ghibli-description {
+  font-size: 1.2rem;
+  color: #444;
+  max-height: auto;
+  font-family: "Kaushan Script", cursive;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 586px) {
+  .ghibli-container {
+    flex-direction: column;
+  }
+  .ghibli-image {
+    width: 100%;
+    height: auto;
+  }
+  .ghibli-card{
+    margin: 0;
+    margin-top: 50px;
+  }
+}
+
+

@@ -1,0 +1,49 @@
+<div class="ghibli-container">
+  <div *ngIf="controller === 1">
+
+    <img class="ghibli-image" [src]="image" alt="{{original_title }}" />
+  
+  </div>
+  
+  <ion-card class="ghibli-card">
+  
+    <div *ngIf="controller === 0">
+  
+      <ion-avatar class="ghibli-avatar">
+        <img [src]="image" alt="{{ original_title }}" />
+      </ion-avatar>
+    
+      <div class="ghibli-info">
+        <div class="ghibli-title-g">{{ original_title }}</div>
+        <div class="ghibli-subtitle-g">
+          {{ original_title_romanised }}
+        </div>
+        <div class="ghibli-subtitle-g">
+          Lanzamiento: {{ release_date }}
+        </div>
+      </div>
+    </div>
+  
+  
+  
+    <div *ngIf="controller === 1" class="ghibli-content">
+  
+      <div class="ghibli-info">
+        <h2 class="ghibli-title">{{ original_title }}</h2>
+        <h3 class="ghibli-subtitle">{{ original_title_romanised }}</h3>
+        <p class="ghibli-subtitle"><strong>Lanzamiento:</strong> {{ release_date }}</p>
+        <p class="ghibli-subtitle"><strong>Duración:</strong> {{ running_time }} minutos</p>
+        <p class="ghibli-subtitle"><strong>Puntuación:</strong> {{rt_score }}/100</p>
+        <p class="ghibli-description">{{ description }}</p>
+      </div>
+  
+    </div>
+  
+  </ion-card>
+  
+  
+</div>
+
+
+
+

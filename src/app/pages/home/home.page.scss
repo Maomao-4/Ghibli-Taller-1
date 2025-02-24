@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+.background {
+  background-size:cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/assets/img/howl044.jpg");
+  background-position: center center;
+  width: 100%;
+  height: auto;
+  min-height: 94.3vh;
+}
+
+
+ion-searchbar{
+  --background: rgba(129, 129, 133, 0.3);
+  --color: white;
+  --placeholder-color: rgb(255, 255, 255);
+  --border-radius: 20px;
+  --border-width: 0;
+  --border-color: transparent;
+  --drop-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --backdrop-filter: blur(5px);
+  --webkit-backdrop-filter: blur(5px);
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --placeholder-font-style: italic;
+  max-width: 500px;
+  width: 100%; 
+}
+
+.searchbar-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  width: 100%;
+}
+
+.ghibli-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 100px; 
+}
+
+

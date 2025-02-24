@@ -1,0 +1,30 @@
+<app-header param="1"/>
+
+<ion-content mode="ios">
+  <div class="background" *ngIf="movieD">
+    <ion-grid>
+
+      <ion-row class="ion-text-center ion-justify-content-center ion-align-items-center">
+        <ion-col size-lg="6" size-md="8" size-sm="10" size="10">
+          <app-card 
+            [image]="movieD.image" 
+            [original_title]="movieD.original_title" 
+            [original_title_romanised]="movieD.original_title_romanised" 
+            [release_date]="movieD.release_date" 
+            [running_time]="movieD.running_time" 
+            [rt_score]="movieD.rt_score" 
+            [description]="movieD.description" 
+            [controller]="1">
+          </app-card>
+        </ion-col>
+      </ion-row>
+    
+    </ion-grid>
+  </div>
+</ion-content>
+
+
+
+
+
+
