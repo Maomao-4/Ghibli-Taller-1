@@ -5,11 +5,27 @@
     url("/assets/img/howl044.jpg");
   background-position: center center;
   width: 100%;
-  height: auto ;
+  min-height: 100vh;
+  height: auto; 
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+ion-grid{
+  width: 100%;
+  max-width: 1200px;
+}
+
+ion-col{
+  display: felx;
   justify-content: center;
   align-items: center;
 }
 
-
-
+@media(max-width: 768px){
+  .background{
+    padding: 20px 0;
+  }
+}
