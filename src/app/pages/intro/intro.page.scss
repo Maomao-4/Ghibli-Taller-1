@@ -43,3 +43,9 @@
   width: 300px;
   height: 300px;
 }
+
+@media (max-width: 700px){
+  .totoro{
+    display: none;
+  }
+}
