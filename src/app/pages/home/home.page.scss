@@ -1,46 +1,420 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    background-position: 1000px 0;
+    opacity: 0.5;
+  }
+}
+
+@keyframes floatingLight {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 0.4;
+  }
+  33% {
+    transform: translate(-30px, 20px) rotate(120deg) scale(1.1);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(30px, -20px) rotate(240deg) scale(0.9);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg) scale(1);
+    opacity: 0.4;
+  }
+}
+
+@keyframes homeFireflyFloat {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate(var(--tx1), var(--ty1)) scale(1.2) rotate(120deg);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(var(--tx2), var(--ty2)) scale(0.9) rotate(240deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes homeFireflyGlow {
+  0%, 100% {
+    filter: blur(2px) brightness(1);
+    box-shadow: 
+      0 0 8px rgba(245, 171, 80, 0.4),
+      0 0 16px rgba(245, 171, 80, 0.2);
+  }
+  50% {
+    filter: blur(3px) brightness(1.5);
+    box-shadow: 
+      0 0 16px rgba(245, 171, 80, 0.6),
+      0 0 32px rgba(245, 171, 80, 0.3);
+  }
+}
+
+@keyframes homeFireflyGlowHover {
+  0%, 100% {
+    filter: blur(3px) brightness(1.8);
+    box-shadow: 
+      0 0 20px rgba(245, 171, 80, 0.8),
+      0 0 40px rgba(245, 171, 80, 0.5);
+  }
+  50% {
+    filter: blur(4px) brightness(2.2);
+    box-shadow: 
+      0 0 30px rgba(245, 171, 80, 1),
+      0 0 60px rgba(245, 171, 80, 0.7);
+  }
+}
+
+@keyframes dustParticle {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg) scale(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-100px) rotate(180deg) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200px) rotate(360deg) scale(0.8);
+  }
+}
+
+@keyframes fireflyPathHome {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+  33% {
+    transform: translate(var(--tx1), var(--ty1)) scale(1.2);
+    opacity: 0.7;
+  }
+  66% {
+    transform: translate(var(--tx2), var(--ty2)) scale(0.9);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+}
+
+@keyframes fireflyPulse {
+  0%, 100% {
+    filter: blur(2px) brightness(1);
+    box-shadow: 
+      0 0 5px rgba(245, 171, 80, 0.3),
+      0 0 10px rgba(245, 171, 80, 0.2);
+  }
+  50% {
+    filter: blur(3px) brightness(1.3);
+    box-shadow: 
+      0 0 10px rgba(245, 171, 80, 0.5),
+      0 0 20px rgba(245, 171, 80, 0.3);
+  }
+}
+
 .background {
-  background-size:cover;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/assets/img/howl044.jpg");
+  background-size: cover;
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.75)
+  ),
+  url("/assets/img/howl044.jpg");
   background-position: center center;
   width: 100%;
   height: auto;
   min-height: 94.3vh;
+  position: relative;
+  overflow: hidden;
+
+  // Efecto de polvo mágico mejorado
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.4) 100%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(245, 171, 80, 0.03) 0%,
+        rgba(245, 171, 80, 0.03) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+    pointer-events: none;
+    animation: shimmer 60s linear infinite;
+    mix-blend-mode: overlay;
+  }
+
+  // Efecto de luz ambiental mejorado
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(245, 171, 80, 0.15) 0%, transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(248, 228, 195, 0.15) 0%, transparent 60%),
+      radial-gradient(circle at 50% 50%, rgba(245, 171, 80, 0.1) 0%, transparent 50%);
+    mix-blend-mode: screen;
+    animation: floatingLight 20s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    filter: blur(40px);
+  }
+
+  // Partículas de polvo mejoradas
+  .dust {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(245, 171, 80, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(1px);
+
+    @for $i from 1 through 50 {
+      &:nth-child(#{$i}) {
+        left: #{random(100)}vw;
+        top: #{random(100)}vh;
+        opacity: #{random(5) * 0.1};
+        animation: dustParticle #{random(10) + 5}s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        animation-delay: #{random(10)}s;
+      }
+    }
+  }
+
+  // Luciérnagas mejoradas
+  .firefly-home {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    z-index: 2;
+    transition: all 0.3s ease;
+    
+    @for $i from 1 through 30 {
+      &:nth-child(#{$i}) {
+        --base-opacity: #{random(5) * 0.1 + 0.3};
+        --size: #{random(5) + 3}px;
+        width: var(--size);
+        height: var(--size);
+        --tx1: #{random(200) - 100}px;
+        --ty1: #{random(200) - 100}px;
+        --tx2: #{random(200) - 100}px;
+        --ty2: #{random(200) - 100}px;
+        left: #{random(90) + 5}vw;
+        top: #{random(90) + 5}vh;
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.9),
+          rgba(245, 171, 80, 0.7) 40%,
+          transparent 100%
+        );
+        animation: 
+          homeFireflyFloat #{random(15) + 10}s infinite ease-in-out,
+          homeFireflyGlow #{random(4) + 2}s infinite ease-in-out;
+        animation-delay: -#{random(15)}s;
+        opacity: var(--base-opacity);
+
+        &:hover {
+          animation: 
+            homeFireflyFloat #{random(15) + 10}s infinite ease-in-out,
+            homeFireflyGlowHover #{random(4) + 2}s infinite ease-in-out;
+          opacity: calc(var(--base-opacity) * 1.5);
+        }
+
+        &.hover-active {
+          animation: 
+            homeFireflyFloat #{random(15) + 10}s infinite ease-in-out,
+            homeFireflyGlowHover #{random(4) + 2}s infinite ease-in-out !important;
+          opacity: calc(var(--base-opacity) * 2);
+        }
+      }
+    }
+  }
 }
 
-
-ion-searchbar{
+// Searchbar mejorada
+ion-searchbar {
   --background: rgba(129, 129, 133, 0.3);
   --color: white;
-  --placeholder-color: rgb(255, 255, 255);
+  --placeholder-color: rgba(255, 255, 255, 0.8);
   --border-radius: 20px;
-  --border-width: 0;
-  --border-color: transparent;
-  --drop-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  --backdrop-filter: blur(5px);
-  --webkit-backdrop-filter: blur(5px);
+  --border-width: 1px;
+  --border-color: rgba(245, 171, 80, 0.3);
+  --drop-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  --backdrop-filter: blur(12px);
+  --webkit-backdrop-filter: blur(12px);
   --padding-start: 20px;
   --padding-end: 20px;
-  --padding-top: 10px;
-  --padding-bottom: 10px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
   --placeholder-font-style: italic;
   max-width: 500px;
-  width: 100%; 
+  width: 100%;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 22px;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(245, 171, 80, 0.4),
+      transparent
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  &:focus-within {
+    --background: rgba(129, 129, 133, 0.4);
+    --border-color: rgba(245, 171, 80, 0.5);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.2),
+      0 0 20px rgba(245, 171, 80, 0.2);
+    
+    &::before {
+      opacity: 1;
+    }
+    
+    &::part(input) {
+      color: white;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+  }
 }
 
+// Contenedor de searchbar mejorado
 .searchbar-container {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  padding: 2rem 0;
+  position: relative;
+  z-index: 2;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(245, 171, 80, 0.3),
+      transparent
+    );
+    transform-origin: center;
+    transition: all 0.5s ease;
+  }
+  
+  &::before {
+    left: 0;
+    transform: scaleX(0.8);
+  }
+  
+  &::after {
+    right: 0;
+    transform: scaleX(0.8);
+  }
+  
+  &:hover {
+    &::before,
+    &::after {
+      transform: scaleX(1);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(245, 171, 80, 0.5),
+        transparent
+      );
+    }
+  }
 }
 
+// Grid de películas mejorado
 .ghibli-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 100px; 
+  gap: 100px;
+  position: relative;
+  z-index: 1;
+  padding: 2rem 0;
+  perspective: 1000px;
+  
+  ion-col {
+    opacity: 0;
+    transform: translateY(20px) rotateX(10deg);
+    animation: cardAppear 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    
+    @for $i from 1 through 20 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+
+  ion-col:hover {
+    & ~ .firefly-home {
+      animation: 
+        homeFireflyFloat #{random(15) + 10}s infinite ease-in-out,
+        homeFireflyGlowHover #{random(4) + 2}s infinite ease-in-out !important;
+      opacity: calc(var(--base-opacity) * 2);
+    }
+  }
 }
 
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) rotateX(20deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+// Media queries mejorados
+@media (max-width: 768px) {
+  .searchbar-container {
+    &::before,
+    &::after {
+      width: 25%;
+    }
+  }
+  
+  .ghibli-row {
+    gap: 50px;
+    padding: 1rem;
+  }
+}
 

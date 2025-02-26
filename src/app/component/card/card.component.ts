@@ -8,7 +8,7 @@ import { CommonModule, NgIf } from '@angular/common';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
   standalone: true,
-  imports: [IonContent, IonCard, IonAvatar,NgIf],
+  imports: [IonContent, IonCard, IonAvatar,NgIf, CommonModule],
 })
 
 export class CardComponent  implements OnInit {
@@ -27,3 +27,5 @@ export class CardComponent  implements OnInit {
   @Input() controller: number = 0;
 
 }
+
+

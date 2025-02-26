@@ -1,21 +1,317 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap');
-.background {
-  background-size: cover;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/assets/img/howl044.jpg");
-  background-position: center center;
-  width: 100%;
-  min-height: 100vh;
-  height: auto; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0;
-}
-
-
-@media(max-width: 768px){
-  .background{
-    padding: 20px 0;
+@keyframes fadeInBlur {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
   }
 }
+
+@keyframes detailFireflyFloat {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate(var(--tx1), var(--ty1)) scale(1.2) rotate(120deg);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(var(--tx2), var(--ty2)) scale(0.9) rotate(240deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes detailFireflyGlow {
+  0%, 100% {
+    filter: blur(2px) brightness(1);
+    box-shadow: 
+      0 0 8px rgba(245, 171, 80, 0.4),
+      0 0 16px rgba(245, 171, 80, 0.2);
+  }
+  50% {
+    filter: blur(3px) brightness(1.5);
+    box-shadow: 
+      0 0 16px rgba(245, 171, 80, 0.6),
+      0 0 32px rgba(245, 171, 80, 0.3);
+  }
+}
+
+@keyframes detailFireflyGlowHover {
+  0%, 100% {
+    filter: blur(3px) brightness(1.8);
+    box-shadow: 
+      0 0 20px rgba(245, 171, 80, 0.8),
+      0 0 40px rgba(245, 171, 80, 0.5);
+  }
+  50% {
+    filter: blur(4px) brightness(2.2);
+    box-shadow: 
+      0 0 30px rgba(245, 171, 80, 1),
+      0 0 60px rgba(245, 171, 80, 0.7);
+  }
+}
+
+@keyframes magicSparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes fireflyDetailPath {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(var(--tx1), var(--ty1)) scale(1.2) rotate(90deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(var(--tx2), var(--ty2)) scale(0.9) rotate(180deg);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(var(--tx3), var(--ty3)) scale(1.1) rotate(270deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+@keyframes fireflyDetailGlow {
+  0%, 100% {
+    filter: blur(2px) brightness(1);
+    box-shadow: 
+      0 0 6px rgba(245, 171, 80, 0.4),
+      0 0 12px rgba(245, 171, 80, 0.2);
+  }
+  50% {
+    filter: blur(3px) brightness(1.4);
+    box-shadow: 
+      0 0 12px rgba(245, 171, 80, 0.6),
+      0 0 24px rgba(245, 171, 80, 0.3);
+  }
+}
+
+.background {
+  background-size: cover;
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0.75)
+  ),
+  url("/assets/img/howl044.jpg");
+  background-position: center center;
+  width: 100%;
+  height: auto;
+  min-height: 94.3vh;
+  position: relative;
+  animation: fadeInBlur 1s ease-out;
+
+  // Enhanced vignette
+  &::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      circle at center,
+      transparent 20%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+    pointer-events: none;
+  }
+
+  // Efecto de luz ambiental mejorado
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(245, 171, 80, 0.15) 0%, transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(248, 228, 195, 0.15) 0%, transparent 60%),
+      radial-gradient(circle at 50% 50%, rgba(245, 171, 80, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(248, 228, 195, 0.12) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(245, 171, 80, 0.08) 0%, transparent 40%);
+    mix-blend-mode: screen;
+    animation: ambientLight 20s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    filter: blur(30px);
+  }
+
+  // Sparkles
+  .sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(245, 171, 80, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+
+    @for $i from 1 through 20 {
+      &:nth-child(#{$i}) {
+        left: #{random(100)}vw;
+        top: #{random(100)}vh;
+        animation: magicSparkle #{random(5) + 3}s infinite ease-in-out;
+        animation-delay: #{random(5)}s;
+      }
+    }
+  }
+
+  // Luciérnagas mejoradas
+  .firefly-detail {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    z-index: 2;
+    transition: all 0.3s ease;
+    
+    @for $i from 1 through 25 {
+      &:nth-child(#{$i}) {
+        --base-opacity: #{random(5) * 0.1 + 0.3};
+        --size: #{random(6) + 3}px;
+        width: var(--size);
+        height: var(--size);
+        --tx1: #{random(300) - 150}px;
+        --ty1: #{random(300) - 150}px;
+        --tx2: #{random(300) - 150}px;
+        --ty2: #{random(300) - 150}px;
+        left: #{random(80) + 10}vw;
+        top: #{random(80) + 10}vh;
+        background: radial-gradient(
+          circle at center,
+          rgba(255, 255, 255, 0.9),
+          rgba(245, 171, 80, 0.8) 30%,
+          rgba(245, 171, 80, 0.3) 60%,
+          transparent 100%
+        );
+        animation: 
+          detailFireflyFloat #{random(20) + 15}s infinite ease-in-out,
+          detailFireflyGlow #{random(4) + 3}s infinite ease-in-out;
+        animation-delay: -#{random(20)}s;
+        opacity: var(--base-opacity);
+
+        &:hover {
+          animation: 
+            detailFireflyFloat #{random(20) + 15}s infinite ease-in-out,
+            detailFireflyGlowHover #{random(4) + 3}s infinite ease-in-out;
+          opacity: calc(var(--base-opacity) * 1.5);
+        }
+
+        &.hover-active {
+          animation: 
+            detailFireflyFloat #{random(20) + 15}s infinite ease-in-out,
+            detailFireflyGlowHover #{random(4) + 3}s infinite ease-in-out !important;
+          opacity: calc(var(--base-opacity) * 2);
+        }
+      }
+    }
+  }
+}
+
+@keyframes ambientLight {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1) rotate(0deg);
+    filter: blur(30px);
+  }
+  25% {
+    opacity: 0.3;
+    transform: scale(1.1) rotate(90deg);
+    filter: blur(35px);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15) rotate(180deg);
+    filter: blur(40px);
+  }
+  75% {
+    opacity: 0.3;
+    transform: scale(1.1) rotate(270deg);
+    filter: blur(35px);
+  }
+}
+
+// Content wrapper
+.detail-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  
+  // Decorative border
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(245, 171, 80, 0.3),
+      transparent
+    );
+  }
+}
+
+// Navigation buttons
+.nav-button {
+  --background: rgba(245, 171, 80, 0.1);
+  --background-hover: rgba(245, 171, 80, 0.2);
+  --border-radius: 20px;
+  --border-color: rgba(245, 171, 80, 0.3);
+  --padding-start: 20px;
+  --padding-end: 20px;
+  
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(245, 171, 80, 0.2),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover {
+    --background: var(--background-hover);
+    transform: translateY(-2px);
+    
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.detail-content:hover {
+  .firefly-detail {
+    animation: 
+      detailFireflyFloat #{random(20) + 15}s infinite ease-in-out,
+      detailFireflyGlowHover #{random(4) + 3}s infinite ease-in-out !important;
+    opacity: calc(var(--base-opacity) * 2);
+  }
+}
+

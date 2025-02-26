@@ -1,4 +1,5 @@
 <div class="ghibli-container">
+  <div class="firefly" *ngFor="let i of [].constructor(15)"></div>
   <div *ngIf="controller === 1">
 
     <img class="ghibli-image" [src]="image" alt="{{original_title }}" />

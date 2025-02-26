@@ -1,23 +1,342 @@
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+
+
+@keyframes pulseLight {
+  0% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  33% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1) rotate(120deg);
+  }
+  66% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(0.95) rotate(240deg);
+  }
+  100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1) rotate(360deg);
+  }
+}
+
+@keyframes floatingShadow {
+  0% {
+    box-shadow: 
+      0 10px 20px rgba(245, 171, 80, 0.2),
+      0 6px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 
+      0 20px 40px rgba(245, 171, 80, 0.3),
+      0 12px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
+  100% {
+    box-shadow: 
+      0 10px 20px rgba(245, 171, 80, 0.2),
+      0 6px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    border-color: rgba(245, 171, 80, 0.3);
+    box-shadow: 0 0 10px rgba(245, 171, 80, 0.2);
+  }
+  50% {
+    border-color: rgba(245, 171, 80, 0.8);
+    box-shadow: 0 0 20px rgba(245, 171, 80, 0.4);
+  }
+}
+
+
+@keyframes fireflyFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translate(var(--tx1), var(--ty1)) scale(1.2);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(var(--tx2), var(--ty2)) scale(0.8);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(var(--tx3), var(--ty3)) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes fireflyGlow {
+  0%, 100% {
+    filter: blur(2px) brightness(1);
+    box-shadow: 
+      0 0 6px rgba(245, 171, 80, 0.4),
+      0 0 12px rgba(245, 171, 80, 0.2);
+  }
+  50% {
+    filter: blur(3px) brightness(1.4);
+    box-shadow: 
+      0 0 12px rgba(245, 171, 80, 0.6),
+      0 0 24px rgba(245, 171, 80, 0.3);
+  }
+}
+
+@keyframes fireflyGlowHover {
+  0%, 100% {
+    filter: blur(2px) brightness(1.2);
+    box-shadow: 
+      0 0 8px rgba(245, 171, 80, 0.6),
+      0 0 16px rgba(245, 171, 80, 0.4);
+  }
+  50% {
+    filter: blur(3px) brightness(1.6);
+    box-shadow: 
+      0 0 16px rgba(245, 171, 80, 0.8),
+      0 0 32px rgba(245, 171, 80, 0.5);
+  }
+}
+
 .ghibli-container {
   display: flex;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  perspective: 1000px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: radial-gradient(
+      circle at center,
+      rgba(245, 171, 80, 0),
+      rgba(245, 171, 80, 0)
+    );
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+  }
+
+
+  &[data-controller="1"] {
+    // Luciérnagas
+    .firefly {
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+      mix-blend-mode: screen;
+      transition: opacity 0.3s ease;
+      
+      @for $i from 1 through 15 {
+        &:nth-child(#{$i}) {
+          --base-opacity: #{random(5) * 0.1 + 0.3};
+          --duration: #{random(8) + 6}s;
+          --glow-duration: #{random(3) + 2}s;
+          --size: #{random(4) + 2}px;
+          width: var(--size);
+          height: var(--size);
+          --tx1: #{random(100) - 50}px;
+          --ty1: #{random(100) - 50}px;
+          --tx2: #{random(100) - 50}px;
+          --ty2: #{random(100) - 50}px;
+          --tx3: #{random(100) - 50}px;
+          --ty3: #{random(100) - 50}px;
+          left: random(80) * 1% + 10%;
+          top: random(80) * 1% + 10%;
+          background: radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0.8),
+            rgba(245, 171, 80, 0.6) 50%,
+            transparent 100%
+          );
+          animation: 
+            fireflyFloat var(--duration, 8s) infinite ease-in-out,
+            fireflyGlow var(--glow-duration, 3s) infinite ease-in-out;
+          animation-delay: #{random(5)}s;
+          opacity: var(--base-opacity);
+          transform-origin: center;
+        }
+      }
+    }
+
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      background: 
+        radial-gradient(
+          circle at center,
+          rgba(245, 171, 80, 0.2),
+          rgba(248, 228, 195, 0.15) 40%,
+          transparent 70%
+        );
+      border-radius: 50%;
+      z-index: 0;
+      animation: pulseLight 8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      mix-blend-mode: screen;
+      filter: blur(8px);
+    }
+
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: 
+        radial-gradient(
+          circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(245, 171, 80, 0.1),
+          transparent 50%
+        );
+      border-radius: 20px;
+      z-index: -1;
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+
+
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(245, 171, 80, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(1px);
+      
+      @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+          left: random(100) * 1%;
+          top: random(100) * 1%;
+          transform-origin: center;
+          animation: sparkle #{3 + random(4)}s infinite ease-in-out;
+          animation-delay: #{random(5)}s;
+        }
+      }
+    }
+  }
 
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(-8px) scale(1.02) rotateX(2deg);
     cursor: pointer;
-    filter: drop-shadow(3px 3px 10px rgba(245, 171, 80, 0.884));
+
+
+    .ghibli-card {
+      animation: floatingShadow 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(245, 171, 80, 0.4);
+    }
+
+    .ghibli-image,
+    .ghibli-avatar img {
+      border-color: rgba(245, 171, 80, 0.8);
+      filter: 
+        brightness(1.05) 
+        contrast(1.05)
+        drop-shadow(0 10px 20px rgba(245, 171, 80, 0.3));
+      transform: scale(1.03) translateZ(30px);
+    }
+
+    .ghibli-title,
+    .ghibli-title-g {
+      color: #222;
+      text-shadow: 
+        0 0 10px rgba(245, 171, 80, 0.3),
+        0 0 20px rgba(245, 171, 80, 0.2);
+      transform: translateZ(20px);
+    }
+
+    .ghibli-subtitle,
+    .ghibli-subtitle-g {
+      transform: translateZ(15px);
+    }
+
+    .ghibli-description {
+      transform: translateZ(10px);
+    }
+
+    .firefly {
+      animation: 
+        fireflyFloat var(--duration, 8s) infinite ease-in-out,
+        fireflyGlowHover var(--glow-duration, 3s) infinite ease-in-out;
+      opacity: calc(var(--base-opacity, 0.4) * 1.5);
+    }
   }
 }
 
 .ghibli-card {
-  background: #f8e4c3;
+  background: linear-gradient(
+    165deg,
+    #f8e4c3,
+    #fff2e0
+  );
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    0 4px 4px rgba(0, 0, 0, 0.05);
   width: 100%;
   min-height: 500px;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transform-style: preserve-3d;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(245, 171, 80, 0.08)
+    );
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 22px;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(245, 171, 80, 0.4),
+      transparent
+    );
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    filter: blur(2px);
+  }
 }
 
 .ghibli-avatar {
@@ -29,34 +348,76 @@
   position: relative;
   overflow: hidden;
   --border-radius: 10px;
-}
+  transform-style: preserve-3d;
 
-.ghibli-avatar img {
-  width: 80%;
-  height: 80%;
-  object-fit: fill;
-  border: 2px solid #f5ab50;
-  margin-top: 30px;
+  img {
+    width: 80%;
+    height: 80%;
+    object-fit: fill;
+    border: 2px solid #f5ab50;
+    margin-top: 30px;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    animation: borderGlow 4s infinite ease-in-out;
+  }
 }
 
 .ghibli-info {
   text-align: center;
+  padding: 1.5rem;
+  transition: all 0.5s ease;
+  position: relative;
+  transform-style: preserve-3d;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(245, 171, 80, 0.4),
+      transparent
+    );
+  }
 }
 
 .ghibli-title-g {
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
+  transition: all 0.4s ease;
+  margin-bottom: 0.5rem;
 }
 
 .ghibli-subtitle-g {
   font-size: 1.1rem;
   color: #666;
   font-family: "Kaushan Script", cursive;
+  margin-top: 0.5rem;
+  opacity: 0.9;
 }
 
 .ghibli-content {
-  padding: 15px;
+  padding: 20px;
+  position: relative;
+}
+
+.ghibli-image,
+.ghibli-avatar img {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: scale(1.03);
+    filter: 
+      brightness(1.05)
+      contrast(1.05)
+      drop-shadow(0 0 15px rgba(245, 171, 80, 0.3));
+  }
 }
 
 .ghibli-image {
@@ -67,10 +428,36 @@
   border: 2px solid #f5ab50;
   position: relative;
   top: 25px;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
-.ghibli-info {
-  flex: 1;
+
+.ghibli-title,
+.ghibli-title-g {
+  position: relative;
+  transition: all 0.5s ease;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #f5ab50,
+      transparent
+    );
+    transition: width 0.5s ease;
+  }
+  
+  &:hover::before {
+    width: 70%;
+  }
 }
 
 .ghibli-title {
@@ -78,24 +465,51 @@
   font-weight: bold;
   color: #333;
   font-family: "Noto Serif JP", serif;
+  transition: all 0.4s ease;
+  margin-bottom: 1rem;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #f5ab50,
+      transparent
+    );
+  }
 }
 
 .ghibli-subtitle {
   font-size: 1.1rem;
   color: #666;
   font-family: "Kaushan Script", cursive;
+  margin: 0.5rem 0;
+  opacity: 0.9;
 }
 
 .ghibli-description {
-  font-size: 1.2rem;
-  color: #444;
-  max-height: auto;
-  font-family: "Kaushan Script", cursive;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  position: relative;
+  transition: all 0.5s ease;
+  color: #333;
+  font-family: "Kaushan Script";
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    pointer-events: none;
+    opacity: 0.8;
+  }
 }
 
 @media (max-width: 586px) {
@@ -106,10 +520,27 @@
     width: 100%;
     height: auto;
   }
-  .ghibli-card{
+  .ghibli-card {
     margin: 0;
     margin-top: 50px;
   }
 }
 
+@keyframes particleFloat {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(var(--tx, 20px), var(--ty, 20px)) rotate(360deg);
+  }
+}
 
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
